@@ -16,11 +16,13 @@ struct URLImageView: View {
         if let data = data, let uiimage = UIImage(data: data){
             Image(uiImage: uiimage)
                 .resizable()
+                .aspectRatio(contentMode: .fit)
                 .frame(width: Constants.ImageFrameWidth, height: Constants.ImageFrameHeight)
                 .background(Color.gray)
         }else{
-            Image("")
+            Image(systemName: "newspaper")
                 .resizable()
+                .aspectRatio(contentMode: .fit)
                 .frame(width: Constants.ImageFrameWidth, height: Constants.ImageFrameHeight)
                 .background(Color.gray)
                 .onAppear(){
@@ -49,6 +51,6 @@ struct URLImageView: View {
 
 struct URLImageView_Previews: PreviewProvider {
     static var previews: some View {
-        URLImageView(urlString: "https://i.ytimg.com/vi/4Q46xYqUwZQ/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAS_Nc7-GLRUYSe9xuDqi7qU96S-g")
+        URLImageView(urlString: "https://www.youtube.com/watch?v=MBCX1atOvdA")
     }
 }
