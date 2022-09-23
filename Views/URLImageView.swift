@@ -9,41 +9,34 @@ import SwiftUI
 
 struct URLImageView: View {
     let urlString : String?
+    var imageWidth : CGFloat = Constants.ImageFrameWidth
+    var imageHeight : CGFloat = Constants.ImageFrameHeight
     
     @State var data : Data?
     
     var body: some View {
-        if let data = data, let uiimage = UIImage(data: data){
-            Image(uiImage: uiimage)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: Constants.ImageFrameWidth, height: Constants.ImageFrameHeight)
-                .background(Color.gray)
-        }else{
-            Image(systemName: "newspaper")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: Constants.ImageFrameWidth, height: Constants.ImageFrameHeight)
-                .background(Color.gray)
-                .onAppear(){
-                    fetchData()
+        
+        AsyncImage(
+                url: URL(string: urlString ?? ""),
+                content: { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: imageWidth, height: imageHeight, alignment: .center)
+                        
+                },
+                placeholder: {
+                    ZStack{
+                        Image(systemName: "newspaper").resizable()
+                            .frame(width: imageWidth, height: imageHeight, alignment: .center)
+                            .aspectRatio(contentMode: .fit)
+                            .opacity(0.3)
+                        ProgressView()
+                            .frame(width: 50, height: 50, alignment: .center)
+                            .aspectRatio(contentMode: .fit)
+                    }
                 }
-        }
-    }
-    
-    private func fetchData(){
-        guard (urlString != nil) else{
-            return
-        }
-        
-        guard let url = URL(string: urlString!) else{
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url){ data,_,_ in
-            self.data = data
-        }
-        task.resume()
+            )
+
     }
     
     
