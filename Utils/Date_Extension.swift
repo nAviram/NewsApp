@@ -8,6 +8,7 @@
 import Foundation
 
 
+//add the ability to substruct 2 dates
 extension Date {
 
     static func - (lhs: Date, rhs: Date) -> TimeInterval {

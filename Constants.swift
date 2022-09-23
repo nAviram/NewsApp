@@ -24,7 +24,6 @@ struct Constants{
     static let fromDateDefault = "2022-09-22"
     
     static let subjectDefault = "Apple"
-//    static let countryDefault = "us"
     
     
     //UI Params:

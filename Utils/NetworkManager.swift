@@ -21,7 +21,6 @@ public class NetworkManager : ObservableObject{
         //for example:
 //    https://newsapi.org/v2/top-headlines?apiKey=b2d9f0c85995458285ff4e597c4ae536&sortBy=popularity&from=2022-09-22&country=us
         
-//        let subject_selected = subject.count>0 ? subject : Constants.subjectDefault
         
 //        let dateFormatter = ISO8601DateFormatter()
         
@@ -79,10 +78,7 @@ public class NetworkManager : ObservableObject{
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
         }
-         
-
-        
-            
+                     
             // Send HTTP Request
         let task = URLSession.shared.dataTask(with: request) {[weak self] (data, response, error) in
             
@@ -131,18 +127,3 @@ public class NetworkManager : ObservableObject{
     
 
 }//Network Manager
-
-
-
-//TODO: DELETE:
-//
-//public class DataManager {
-//
-//    static var url
-//
-//
-//
-//
-//
-//
-//}
