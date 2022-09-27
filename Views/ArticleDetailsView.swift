@@ -52,7 +52,6 @@ struct ArticleDetailsView: View {
 struct ArticleDetailsView_Previews: PreviewProvider {
     
     static var previews: some View {
-//        ArticleDetailsView()
         ArticleDetailsView(article: Article.getExampleArticle())
     }
 }

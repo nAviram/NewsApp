@@ -27,7 +27,7 @@ public class NetworkManager : ObservableObject{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        var fromDateString = "from=" + dateFormatter.string(from:filters.fromDate)
+        let fromDateString = "from=" + dateFormatter.string(from:filters.fromDate)
         var toDateString =   "&to="   + dateFormatter.string(from:filters.toDate)
         
         let datesDiff = filters.toDate - filters.fromDate

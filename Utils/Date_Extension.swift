@@ -15,15 +15,5 @@ extension Date {
         return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
     }
     
-//    static func getFormatedDateFromISO8601(iso8601formatDate: String) -> String{
-//        let stringDate = "2016-05-14T09:30:00.000Z" // ISO 8601 format
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ" // ISO 8601
-//
-//        dateFormatter.date
-//        let date = dateFormatter.dateFromString(iso8601formatDate)
-//        
-//    }
 
 }
