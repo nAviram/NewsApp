@@ -15,11 +15,13 @@ struct ContentView: View {
     @State var selectedLangIndex = 0
     
     @State var subject : String = ""
+    
+    @State var goButtonEnabled : Bool = false
         
     private var eligibleDates: ClosedRange<Date> {
-      let today = Calendar.current.date(byAdding: .minute, value: -1, to: Date())!
+        let today = Calendar.current.date(byAdding: .minute, value: -1, to: Date())!
         let thirty = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
-      return thirty...today
+        return thirty...today
     }
     
     var body: some View {
@@ -30,12 +32,12 @@ struct ContentView: View {
                 HStack{
                     DatePicker("From Date:", selection: $selected_fromDate, in: eligibleDates, displayedComponents: [.date])
                         .onChange(of: selected_fromDate) { _ in
-                            sendNewsNetworkRequest()
+                            goButtonEnabled = filterValidator()
                         }
                     
                     DatePicker("To Date: ", selection: $selected_toDate, displayedComponents: [.date])
                         .onChange(of: selected_toDate) { _ in
-                            sendNewsNetworkRequest()
+                            goButtonEnabled = filterValidator()
                         }
                 }.padding(5)
                     
@@ -47,7 +49,7 @@ struct ContentView: View {
                             })
                         })
                     .onChange(of: selectedLangIndex){ _ in
-                        sendNewsNetworkRequest()
+                        goButtonEnabled = filterValidator()
                     }
                      Spacer()
                 }.padding(5)
@@ -56,9 +58,18 @@ struct ContentView: View {
                     Text("Subject:")
                     TextField("", text: $subject){
                         print("Subject entered!")
-                        sendNewsNetworkRequest()
+                        goButtonEnabled = filterValidator()
                     }
                     Spacer()
+                    Button(action: {
+                        print("GO button pressed!")
+                        sendNewsNetworkRequest()
+                    }){
+                        Text("GO!")
+                            .padding(.trailing)
+                            
+                    }
+                    .disabled(!goButtonEnabled)
                     
                 }.padding(5)
                 
@@ -79,6 +90,7 @@ struct ContentView: View {
 
                 
                 .navigationTitle("Fido's News Feed")
+                
                 .onAppear{
                     sendNewsNetworkRequest()
                 }
@@ -94,6 +106,15 @@ struct ContentView: View {
         let filters = Filters(fromDate: selected_fromDate, toDate: selected_toDate, language: SelectedLanguage, subject: subject)
         
         network.sendGetRequestForNews(filters: filters)
+    }
+    
+    func filterValidator() -> Bool{
+        if selected_toDate - selected_fromDate >= 1 &&
+            !subject.isEmpty{
+            print("True")
+            return true
+        }
+        return false
     }
 }
 

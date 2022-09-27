@@ -20,15 +20,15 @@ public class NetworkManager : ObservableObject{
         
         //for example:
 //    https://newsapi.org/v2/top-headlines?apiKey=b2d9f0c85995458285ff4e597c4ae536&sortBy=popularity&from=2022-09-22&country=us
-        
-        
+//    https://newsapi.org/v2/everything?apiKey=b2d9f0c85995458285ff4e597c4ae536&sortBy=popularity&language=en&from=2022-09-20&to=2022-09-23
+
 //        let dateFormatter = ISO8601DateFormatter()
-        
+    
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        let fromDateString = "from=" + dateFormatter.string(from:filters.fromDate)
-        var toDateString =   "&to="   + dateFormatter.string(from:filters.toDate) + "&"
+        var fromDateString = "from=" + dateFormatter.string(from:filters.fromDate)
+        var toDateString =   "&to="   + dateFormatter.string(from:filters.toDate)
         
         let datesDiff = filters.toDate - filters.fromDate
         if datesDiff < 1
@@ -43,24 +43,24 @@ public class NetworkManager : ObservableObject{
             urlString = Constants.baseUrl
             + Constants.top_headlines + "?"
             + "apiKey=" + Constants.apiValue + "&"
-            + "sortBy=" + Constants.sortByDefault + "&"
+            + "sortBy=" + Constants.sortByPopularity + "&"
             + "language=" + filters.language + "&"
             + fromDateString
             + toDateString
         }
+        
         else{
             urlString = Constants.baseUrl
                     + Constants.everything + "?"
                     + "apiKey=" + Constants.apiValue + "&"
-                    + "sortBy=" + Constants.sortByDefault + "&"
+                    + "sortBy=" + Constants.sortByPublishedAt + "&"
                     + "language=" + filters.language + "&"
                     + "q=" + filters.subject + "&"
                     + fromDateString
                     + toDateString
-                    
         }
         
-        NetworkManager.requestCounter+=1
+        NetworkManager.requestCounter += 1
         print("GET REQUEST #\(NetworkManager.requestCounter) : " + urlString)
         
         guard let urlEncodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{ fatalError("ERROR: Could not create URL Request!") }

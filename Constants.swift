@@ -19,7 +19,8 @@ struct Constants{
     //API Params:
     static let apiValue = "b2d9f0c85995458285ff4e597c4ae536"
     
-    static let sortByDefault = "popularity"
+    static let sortByPopularity = "popularity"
+    static let sortByPublishedAt = "publishedAt"
     
     static let fromDateDefault = "2022-09-22"
     
@@ -32,7 +33,9 @@ struct Constants{
     
     //Filters:
     static let languages = ["ENGLISH", "עברית"]
-    
     static let languagesValues = ["ENGLISH":"en", "עברית":"he"]
+    //Possible options: ar,de,en,es,fr,he,it,nl,no,pt,ru,sv,ud,zh
+    
+    
 }
 
