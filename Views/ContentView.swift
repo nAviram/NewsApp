@@ -89,7 +89,7 @@ struct ContentView: View {
 
 
                 
-                .navigationTitle("Fido's News Feed")
+                .navigationTitle("News Feed App")
                 
                 .onAppear{
                     sendNewsNetworkRequest()

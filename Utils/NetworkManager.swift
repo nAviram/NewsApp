@@ -56,6 +56,7 @@ public class NetworkManager : ObservableObject{
                     + "sortBy=" + Constants.sortByPublishedAt + "&"
                     + "language=" + filters.language + "&"
                     + "q=" + filters.subject + "&"
+                    + "searchIn=title" + "&"
                     + fromDateString
                     + toDateString
         }

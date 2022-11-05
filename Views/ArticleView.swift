@@ -17,12 +17,17 @@ struct ArticleView: View {
             URLImageView(urlString: article.urlToImage)
             VStack{
                 if let publishedAt = article.publishedAt{
-                    Text(publishedAt)
+                    let displayDate = publishedAt.replacingOccurrences(of: "Z", with: "")
+                        .replacingOccurrences(of: "T", with: " ")
+                        .dropLast(3)
+                    Text(displayDate)
                         .fontWeight(.thin)
-                        
+                        .font(.system(size: 14))
                 }
                 Text(article.title)
                     .bold()
+                    .font(.system(size: 15))
+                    
             }
             .padding(2)
         }

@@ -27,8 +27,8 @@ struct URLImageView: View {
                 placeholder: {
                     ZStack{
                         Image(systemName: "newspaper").resizable()
-                            .frame(width: imageWidth, height: imageHeight, alignment: .center)
                             .aspectRatio(contentMode: .fit)
+                            .frame(width: imageWidth, height: imageHeight, alignment: .center)
                             .opacity(0.3)
                         ProgressView()
                             .frame(width: 50, height: 50, alignment: .center)

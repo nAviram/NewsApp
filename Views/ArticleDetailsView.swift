@@ -28,7 +28,11 @@ struct ArticleDetailsView: View {
             
             HStack{
                 if (article.publishedAt != nil){
-                    Text(article.publishedAt!)
+                    let displayDate = article.publishedAt!
+                        .replacingOccurrences(of: "Z", with: "")
+                        .replacingOccurrences(of: "T", with: " ")
+                        .dropLast(3)
+                    Text(displayDate)
                         .bold()
                         .padding(3)
                 }
